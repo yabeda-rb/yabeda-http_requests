@@ -10,18 +10,14 @@ Built-in metrics for external services HTTP calls! This gem is a Part of the [ya
 ## Metrics
 
 Works as the Puma plugin and provides following metrics:
- - `http_requests_total_count` - the number of running puma workers
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/yabeda/http`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+ - `http_requests_total_count` - the number of made external HTTP requests (by host, port, query)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'yabeda-http'
+gem 'yabeda-http_requests'
 ```
 
 And then execute:
@@ -30,21 +26,52 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install yabeda-http
+    $ gem install yabeda-http_requests
 
 ## Usage
 
-TODO: Write usage instructions here
+To collect `http_requests_total_count` you have to set up metrics exporting with [yabeda-prometheus](https://github.com/yabeda-rb/yabeda-prometheus) gem.
 
-## Development
+The metrics page will look like this:
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```
+# TYPE http_requests_total_count counter
+# HELP http_requests_total_count A counter of the total number of external HTTP requests.
+http_requests_total_count{host="twitter.com",port="443",method="GET",query="/dsalahutdinov1"} 149.0
+http_requests_total_count{host="dev.to",port="443",method="GET",query="/amplifr"} 145.0
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To simple set up Grafana, try the [sample dashboard](https://github.com/yabeda-rb/yabeda-http_requests/blob/master/example/grafana/provisioning/dashboards/yabeda-http_requests.json).
+
+## Sample application
+
+Sample application aims to show how Ruby web-application, this gem and Prometheus/Grafana work togather.
+Get into `example` directory and run docker compose:
+
+```sh
+$ cd example
+$ docker-compose up
+```
+
+After docker image builds and all the services get up, you can browse application endpoints:
+ - Ruby web-application runs on [http://localhost:9292/](http://localhost:9292/). Everytime you request page, it schedules random web-scrapping job into sidekiq.
+ - Sidekiq exposes prometheus metrics on [http://localhost:9394/metrics](http://localhost:9394/metrics). This endpoint is scrapped by prometheus exporter every 5 seconds.
+ - Grafana runs on [http://localhost:3000/](http://localhost:3000/). Use `admin/foobar` as login and password to get in. Grafana already has specific dashboard with data visualisation.
+
+Finally, after a couple of minutes when data collected you will see the following:
+![Monitor external HTTP calls with Grafana](docs/http_requests_rate_by_host.png)
+
+## Development with Docker
+
+Get local development environment working and tests running is very easy with docker-compose:
+```bash
+docker-compose run app bundle
+docker-compose run app bundle exec rspec
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/yabeda-http.
+Bug reports and pull requests are welcome on GitHub at https://github.com/yabeda-rb/yabeda-http_requests.
 
 
 ## License
