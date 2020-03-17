@@ -3,9 +3,9 @@
 source 'https://rubygems.org'
 
 gem 'prometheus-client'
-gem 'yabeda-prometheus'
 gem 'yabeda-http_requests',
     git: 'https://github.com/dsalahutdinov/yabeda-http_requests'
+gem 'yabeda-prometheus'
 
 gem 'puma'
 gem 'rack'
