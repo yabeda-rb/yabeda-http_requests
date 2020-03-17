@@ -15,7 +15,7 @@ module Yabeda
       counter :requests_total,
               comment: 'A counter of the total number of external HTTP \
                          requests.',
-              tags: %i[host]
+              tags: %i[host port method query]
 
       ::Sniffer.config do |c|
         c.enabled = true
