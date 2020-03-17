@@ -60,7 +60,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (host) (rate(http_requests_total[5m]) )",
+          "expr": "sum by (host) (rate(http_requests_total_count[5m]) )",
           "interval": "",
           "legendFormat": "{{ host }}",
           "refId": "A"

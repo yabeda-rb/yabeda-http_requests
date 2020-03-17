@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'yabeda/http'
+require 'yabeda/http_requests'
 require 'prometheus/client'
 require 'yabeda/prometheus'
 require 'rack'

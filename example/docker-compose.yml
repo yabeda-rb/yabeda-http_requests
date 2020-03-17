@@ -2,18 +2,13 @@ version: '3.4'
 
 services:
   app: &app
-    image: ruby:latest
+    build:
+      context: .
+    image: yabeda-http_requests:0.1.0
     environment:
-      - BUNDLE_PATH=/bundle
-      - BUNDLE_CONFIG=/app/.bundle/config
       - REDIS_URL=redis://redis:6379/0
       - PROMETHEUS_EXPORTER_PORT=9394
     command: bash
-    working_dir: /app
-    volumes:
-      - .:/app:cached
-      - bundler_data:/bundle
-      - ..:/gem
     depends_on:
       - redis
     tmpfs:
@@ -65,7 +60,6 @@ services:
     restart: always
 
 volumes:
-  bundler_data:
   redis:
   prometheus_data:
   grafana_data:
