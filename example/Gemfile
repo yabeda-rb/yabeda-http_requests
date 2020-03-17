@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'byebug'
 gem 'prometheus-client'
-gem 'yabeda-http', path: '/gem'
+gem 'yabeda-http_requests', path: '/gem'
 gem 'yabeda-prometheus'
 
 gem 'puma'
