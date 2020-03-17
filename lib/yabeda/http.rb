@@ -1,16 +1,20 @@
-require "yabeda/http/version"
+# frozen_string_literal: true
+
+require 'yabeda/http/version'
 require 'yabeda/http/sniffer'
-require "yabeda"
+require 'yabeda'
 require 'sniffer'
 
 require 'byebug'
 module Yabeda
+  # Common module
   module Http
     Yabeda.configure do
       group :http
 
       counter :requests_total,
-              comment: "A counter of the total number of external HTTP requests.",
+              comment: 'A counter of the total number of external HTTP \
+                         requests.',
               tags: %i[host]
 
       ::Sniffer.config do |c|

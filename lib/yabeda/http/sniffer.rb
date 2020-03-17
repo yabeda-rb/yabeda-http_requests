@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Yabeda
   module Http
+    # Middleware for sniffer gem
     class Sniffer
       def call(data_item)
         Yabeda.http_requests_total.increment(
