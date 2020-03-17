@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'yabeda/http'
+require 'yabeda/http_requests'
 require 'faraday'
 
 RSpec.configure do |config|

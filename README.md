@@ -1,4 +1,16 @@
-# Yabeda::Http
+<a href="https://amplifr.com/?utm_source=yabeda-http_requests">
+  <img width="100" height="140" align="right"
+    alt="Sponsored by Amplifr" src="https://amplifr-direct.s3-eu-west-1.amazonaws.com/social_images/image/37b580d9-3668-4005-8d5a-137de3a3e77c.png" />
+</a>
+
+# Yabeda::HttpRequests
+
+Built-in metrics for external services HTTP calls! This gem is a Part of the [yabeda](https://github.com/yabeda-rb/yabeda) suite.
+
+## Metrics
+
+Works as the Puma plugin and provides following metrics:
+ - `http_requests_total_count` - the number of running puma workers
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/yabeda/http`. To experiment with that code, run `bin/console` for an interactive prompt.
 

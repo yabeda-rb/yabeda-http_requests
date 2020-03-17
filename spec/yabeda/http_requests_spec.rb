@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Yabeda::Http do
+RSpec.describe Yabeda::HttpRequests do
   it 'has a version number' do
-    expect(Yabeda::Http::VERSION).not_to be nil
+    expect(Yabeda::HttpRequests::VERSION).not_to be nil
   end
 
   context 'sdf' do
@@ -12,7 +12,7 @@ RSpec.describe Yabeda::Http do
     end
 
     it do
-      expect(Yabeda.http_requests_total.values).to(
+      expect(Yabeda.http_requests_total_count.values).to(
         eq(
           {
             host: 'sushi.com',

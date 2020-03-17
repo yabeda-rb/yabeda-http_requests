@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq'
 require './worker'
 
@@ -10,15 +12,15 @@ class App
     'https://twitter.com/dsalahutdinov1',
     'https://amplifr.com/en',
     'https://dev.to/amplifr'
-  ]
+  ].freeze
 
-  def call(env)
+  def call(_env)
     jobs_count = rand(100).round
     jobs_count.times { Worker.perform_async(URLS.sample) }
 
     [
       200,
-      {"Content-Type" => "text/html"},
+      { 'Content-Type' => 'text/html' },
       ["Enqueued #{jobs_count} jobs"]
     ]
   end

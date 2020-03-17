@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 gem 'byebug'
-gem "prometheus-client"
-gem 'yabeda-prometheus'
+gem 'prometheus-client'
 gem 'yabeda-http', path: '/gem'
+gem 'yabeda-prometheus'
 
 gem 'puma'
 gem 'rack'

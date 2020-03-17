@@ -8,8 +8,7 @@ gem 'rake', '~> 12.0'
 gem 'rspec', '~> 3.0'
 gem 'rubocop'
 
-gem 'byebug'
-gem 'faraday', require: false
+gem 'faraday'
 gem 'sniffer',
     git: 'https://github.com/dsalahutdinov/sniffer',
     branch: 'feature/middleware'
