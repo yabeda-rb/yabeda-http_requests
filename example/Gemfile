@@ -1,0 +1,15 @@
+source 'https://rubygems.org'
+
+gem 'byebug'
+gem "prometheus-client"
+gem 'yabeda-prometheus'
+gem 'yabeda-http', path: '/gem'
+
+gem 'puma'
+gem 'rack'
+gem 'sidekiq'
+
+gem 'faraday', require: false
+gem 'sniffer',
+    git: 'https://github.com/dsalahutdinov/sniffer',
+    branch: 'feature/middleware'

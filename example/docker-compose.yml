@@ -1,0 +1,71 @@
+version: '3.4'
+
+services:
+  app: &app
+    image: ruby:latest
+    environment:
+      - BUNDLE_PATH=/bundle
+      - BUNDLE_CONFIG=/app/.bundle/config
+      - REDIS_URL=redis://redis:6379/0
+      - PROMETHEUS_EXPORTER_PORT=9394
+    command: bash
+    working_dir: /app
+    volumes:
+      - .:/app:cached
+      - bundler_data:/bundle
+      - ..:/gem
+    depends_on:
+      - redis
+    tmpfs:
+      - /tmp
+
+  web:
+    <<: *app
+    ports:
+      - '9292:9292'
+    command: bundle exec puma
+
+  sidekiq:
+    <<: *app
+    ports:
+      - '9394:9394'
+    command: bundle exec sidekiq -r ./sidekiq.rb
+
+  redis:
+    image: redis
+    volumes:
+      - redis:/data
+    ports:
+      - 6379
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - 9090:9090/tcp
+    depends_on:
+      - sidekiq
+
+  grafana:
+    image: grafana/grafana
+    user: "104"
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./grafana/config.monitoring
+    restart: always
+
+volumes:
+  bundler_data:
+  redis:
+  prometheus_data:
+  grafana_data:
