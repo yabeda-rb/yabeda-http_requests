@@ -12,15 +12,14 @@ RSpec.describe Yabeda::HttpRequests do
     end
 
     it do
-      expect(Yabeda.http_requests_total_count.values).to(
-        eq(
-          {
-            host: 'sushi.com',
-            method: 'GET',
-            port: 80,
-            query: '/nigiri/sake.json'
-          } => 1
-        )
+      expect(Yabeda.http_request_total.values).to(
+        eq({ host: 'sushi.com', method: 'GET', port: 80 } => 1)
+      )
+      expect(Yabeda.http_response_total.values.keys.first).to(
+        include({
+                  host: 'sushi.com', method: 'GET', port: 80,
+                  status: 301
+                })
       )
     end
   end

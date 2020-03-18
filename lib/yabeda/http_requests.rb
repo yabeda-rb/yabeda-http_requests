@@ -9,12 +9,16 @@ module Yabeda
   # Common module
   module HttpRequests
     Yabeda.configure do
-      group :http_requests
+      group :http
 
-      counter :total_count,
+      counter :request_total,
               comment: 'A counter of the total number of external HTTP \
                          requests.',
-              tags: %i[host port method query]
+              tags: %i[host port method]
+      counter :response_total,
+              comment: 'A counter of the total number of external HTTP \
+                         responses.',
+              tags: %i[host port method duration status]
 
       ::Sniffer.config do |c|
         c.enabled = true
