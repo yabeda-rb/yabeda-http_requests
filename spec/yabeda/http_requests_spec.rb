@@ -5,13 +5,13 @@ RSpec.describe Yabeda::HttpRequests do
     expect(Yabeda::HttpRequests::VERSION).not_to be nil
   end
 
-  context 'sdf' do
+  describe 'metrics' do
     before do
       Yabeda.configure!
       Faraday.get 'http://sushi.com/nigiri/sake.json'
     end
 
-    it do
+    it 'holds the proper data' do
       expect(Yabeda.http_request_total.values).to(
         eq({ host: 'sushi.com', method: 'GET', port: 80 } => 1)
       )
@@ -20,6 +20,9 @@ RSpec.describe Yabeda::HttpRequests do
                   host: 'sushi.com', method: 'GET', port: 80,
                   status: 301
                 })
+      )
+      expect(Yabeda.http_response_duration.values.keys.first).to(
+        eq(host: 'sushi.com', port: 80, method: 'GET', status: 301)
       )
     end
   end

@@ -11,6 +11,11 @@ module Yabeda
     Yabeda.configure do
       group :http
 
+      LONG_RUNNING_REQUEST_BUCKETS = [
+        0.5, 1, 2.5, 5, 10, 25, 50, 100, 250, 500, 1000, # standard
+        30_000, 60_000, 120_000, 300_000, 600_000 # slow queries
+      ].freeze
+
       counter :request_total,
               comment: 'A counter of the total number of external HTTP \
                          requests.',
@@ -19,6 +24,12 @@ module Yabeda
               comment: 'A counter of the total number of external HTTP \
                          responses.',
               tags: %i[host port method duration status]
+
+      histogram :response_duration, tags: %i[host port method status],
+                                    unit: :milliseconds,
+                                    buckets: LONG_RUNNING_REQUEST_BUCKETS,
+                                    comment: "A histogram of the response \
+                                               duration (milliseconds)."
 
       ::Sniffer.config do |c|
         c.enabled = true

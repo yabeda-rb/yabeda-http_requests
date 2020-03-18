@@ -13,6 +13,13 @@ module Yabeda
       end
 
       def response(data_item)
+        log_http_response_total(data_item)
+        log_http_response_duration(data_item)
+      end
+
+      private
+
+      def log_http_response_total(data_item)
         Yabeda.http_response_total.increment(
           host: data_item.request.host,
           port: data_item.request.port,
@@ -22,7 +29,18 @@ module Yabeda
         )
       end
 
-      private
+      def log_http_response_duration(data_item)
+        labels = {
+          host: data_item.request.host,
+          port: data_item.request.port,
+          method: data_item.request.method,
+          status: data_item.response.status
+        }
+
+        Yabeda.http_response_duration.measure(
+          labels, duration_in_milliseconds(data_item)
+        )
+      end
 
       def duration_in_milliseconds(data_item)
         seconds = data_item.response&.timing
