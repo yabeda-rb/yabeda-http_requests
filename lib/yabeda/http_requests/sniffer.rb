@@ -24,7 +24,6 @@ module Yabeda
           host: data_item.request.host,
           port: data_item.request.port,
           method: data_item.request.method,
-          duration: duration_in_milliseconds(data_item),
           status: data_item.response.status
         )
       end

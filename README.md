@@ -10,7 +10,9 @@ Built-in metrics for external services HTTP calls! This gem is a Part of the [ya
 ## Metrics
 
 Works as the Puma plugin and provides following metrics:
- - `http_requests_total_count` - the number of made external HTTP requests (by host, port, query)
+ - `http_request_total` - the number of external HTTP request attempts (by host, port, method)
+ - `http_response_total` - the number of made external HTTP requeusts (by host, port, method, status)
+ - `http_response_duuration` - the histogram of response duration (by host, port, method, status)
 
 ## Installation
 
@@ -30,15 +32,16 @@ Or install it yourself as:
 
 ## Usage
 
-To collect `http_requests_total_count` you have to set up metrics exporting with [yabeda-prometheus](https://github.com/yabeda-rb/yabeda-prometheus) gem.
+After plugin the gem, you just have to set up metrics exporting with [yabeda-prometheus](https://github.com/yabeda-rb/yabeda-prometheus) gem.
 
 The metrics page will look like this:
 
 ```
 # TYPE http_requests_total_count counter
 # HELP http_requests_total_count A counter of the total number of external HTTP requests.
-http_requests_total_count{host="twitter.com",port="443",method="GET",query="/dsalahutdinov1"} 149.0
-http_requests_total_count{host="dev.to",port="443",method="GET",query="/amplifr"} 145.0
+http_request_total{host="twitter.com",port="443",method="GET",query="/dsalahutdinov1"} 149.0
+http_request_total{host="dev.to",port="443",method="GET",query="/amplifr"} 145.0
+...
 ```
 
 To simple set up Grafana, try the [sample dashboard](https://github.com/yabeda-rb/yabeda-http_requests/blob/master/example/grafana/provisioning/dashboards/yabeda-http_requests.json).
@@ -58,6 +61,7 @@ After docker image builds and all the services get up, you can browse applicatio
  - Sidekiq exposes prometheus metrics on [http://localhost:9394/metrics](http://localhost:9394/metrics). This endpoint is scrapped by prometheus exporter every 5 seconds.
  - Grafana runs on [http://localhost:3000/](http://localhost:3000/). Use `admin/foobar` as login and password to get in. Grafana already has specific dashboard with data visualisation.
 
+Follow the [yabeda-external-http-requests](http://localhost:3000/d/OGd-oEXWz/yabeda-external-http-requests?orgId=1&refresh=5s) dashboard in Grafana.
 Finally, after a couple of minutes when data collected you will see the following:
 ![Monitor external HTTP calls with Grafana](docs/http_requests_rate_by_host.png)
 

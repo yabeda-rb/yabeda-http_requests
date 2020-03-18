@@ -23,7 +23,7 @@ module Yabeda
       counter :response_total,
               comment: 'A counter of the total number of external HTTP \
                          responses.',
-              tags: %i[host port method duration status]
+              tags: %i[host port method status]
 
       histogram :response_duration, tags: %i[host port method status],
                                     unit: :milliseconds,

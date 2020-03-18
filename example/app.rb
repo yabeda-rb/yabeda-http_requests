@@ -9,9 +9,10 @@ end
 
 class App
   URLS = [
-    'https://twitter.com/dsalahutdinov1',
+    'https://twitter.com',
     'https://amplifr.com/en',
-    'https://dev.to/amplifr'
+    'https://dev.to/amplifr',
+    'https://unknown.domain/path'
   ].freeze
 
   def call(_env)
