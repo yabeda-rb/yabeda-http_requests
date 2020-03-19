@@ -10,6 +10,4 @@ gem 'rspec', '~> 3.0'
 gem 'rubocop'
 
 gem 'faraday'
-gem 'sniffer',
-    git: 'https://github.com/dsalahutdinov/sniffer',
-    branch: 'feature/middleware'
+gem 'sniffer', '>= 0.4.0'

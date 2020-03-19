@@ -12,6 +12,4 @@ gem 'rack'
 gem 'sidekiq'
 
 gem 'faraday', require: false
-gem 'sniffer',
-    git: 'https://github.com/dsalahutdinov/sniffer',
-    branch: 'feature/middleware'
+gem 'sniffer', '>= 0.4.0'
