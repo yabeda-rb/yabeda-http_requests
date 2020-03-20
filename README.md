@@ -12,7 +12,7 @@ Built-in metrics for external services HTTP calls! This gem is a Part of the [ya
 Works as the Puma plugin and provides following metrics:
  - `http_request_total` - the number of external HTTP request attempts (by host, port, method)
  - `http_response_total` - the number of made external HTTP requeusts (by host, port, method, status)
- - `http_response_duuration` - the histogram of response duration (by host, port, method, status)
+ - `http_response_duration` - the histogram of response duration (by host, port, method, status)
 
 ## Installation
 
