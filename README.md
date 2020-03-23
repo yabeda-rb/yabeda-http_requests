@@ -7,6 +7,8 @@
 
 Built-in metrics for external services HTTP calls! This gem is a Part of the [yabeda](https://github.com/yabeda-rb/yabeda) suite.
 
+Read [introduction article on dev.to](https://dev.to/dsalahutdinov/monitoring-external-services-with-prometheus-and-grafana-5eh6).
+
 ## Metrics
 
 Works as the Puma plugin and provides following metrics:
@@ -63,7 +65,7 @@ After docker image builds and all the services get up, you can browse applicatio
 
 Follow the [yabeda-external-http-requests](http://localhost:3000/d/OGd-oEXWz/yabeda-external-http-requests?orgId=1&refresh=5s) dashboard in Grafana.
 Finally, after a couple of minutes when data collected you will see the following:
-![Monitor external HTTP calls with Grafana](docs/http_requests_rate_by_host.png)
+![Monitor external HTTP calls with Grafana](docs/dashboard.png)
 
 ## Development with Docker
 

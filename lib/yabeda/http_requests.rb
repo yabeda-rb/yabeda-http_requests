@@ -8,7 +8,7 @@ require 'sniffer'
 module Yabeda
   # Common module
   module HttpRequests
-    SNIFFER_STORAGE_SIZE = 1
+    SNIFFER_STORAGE_SIZE = 0
 
     Yabeda.configure do
       group :http
@@ -37,6 +37,7 @@ module Yabeda
         c.enabled = true
         c.store = { capacity: SNIFFER_STORAGE_SIZE }
         c.middleware do |chain|
+          chain.remove(Sniffer::Middleware::Logger)
           chain.add(Yabeda::HttpRequests::Sniffer)
         end
       end
