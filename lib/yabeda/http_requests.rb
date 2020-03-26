@@ -10,6 +10,7 @@ module Yabeda
   module HttpRequests
     SNIFFER_STORAGE_SIZE = 0
 
+    # rubocop: disable Metrics/BlockLength
     Yabeda.configure do
       group :http
 
@@ -37,10 +38,11 @@ module Yabeda
         c.enabled = true
         c.store = { capacity: SNIFFER_STORAGE_SIZE }
         c.middleware do |chain|
-          chain.remove(Sniffer::Middleware::Logger)
+          chain.remove(::Sniffer::Middleware::Logger)
           chain.add(Yabeda::HttpRequests::Sniffer)
         end
       end
     end
+    # rubocop: enable Metrics/BlockLength
   end
 end
