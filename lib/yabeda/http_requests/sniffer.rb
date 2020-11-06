@@ -5,6 +5,7 @@ module Yabeda
     # Middleware for sniffer gem
     class Sniffer
       def request(data_item)
+        yield
         Yabeda.http_request_total.increment(
           host: data_item.request.host,
           port: data_item.request.port,
@@ -13,6 +14,7 @@ module Yabeda
       end
 
       def response(data_item)
+        yield
         log_http_response_total(data_item)
         log_http_response_duration(data_item)
       end
