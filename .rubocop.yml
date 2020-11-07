@@ -1,3 +1,8 @@
 Style/Documentation:
   Exclude:
     - 'example/**/*'
+
+# Rubocop does not support TargetRubyVersion 2.3, while required_ruby_version
+# in the gemspec is set to 2.3.0. This will prevent related offense.
+Gemspec/RequiredRubyVersion:
+  Enabled: false
