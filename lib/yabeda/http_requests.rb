@@ -15,7 +15,6 @@ module Yabeda
       30_000, 60_000, 120_000, 300_000, 600_000 # slow queries
     ].freeze
 
-    # rubocop: disable Metrics/BlockLength
     Yabeda.configure do
       group :http
 
@@ -43,6 +42,5 @@ module Yabeda
         end
       end
     end
-    # rubocop: enable Metrics/BlockLength
   end
 end
