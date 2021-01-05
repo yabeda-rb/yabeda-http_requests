@@ -7,9 +7,11 @@ module Yabeda
       def request(data_item)
         yield
         Yabeda.http_request_total.increment(
-          host: data_item.request.host,
-          port: data_item.request.port,
-          method: data_item.request.method
+          {
+            host: data_item.request.host,
+            port: data_item.request.port,
+            method: data_item.request.method
+          }
         )
       end
 
@@ -23,10 +25,12 @@ module Yabeda
 
       def log_http_response_total(data_item)
         Yabeda.http_response_total.increment(
-          host: data_item.request.host,
-          port: data_item.request.port,
-          method: data_item.request.method,
-          status: data_item.response.status
+          {
+            host: data_item.request.host,
+            port: data_item.request.port,
+            method: data_item.request.method,
+            status: data_item.response.status
+          }
         )
       end
 
