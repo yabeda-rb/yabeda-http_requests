@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'Extends Yabeda metrics to collect external calls'
   spec.homepage      = 'https://github.com/yabeda-rb/yabeda-http_requests'
   spec.license       = 'MIT'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.5')
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/yabeda-rb/yabeda-http_requests'
