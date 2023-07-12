@@ -21,7 +21,7 @@ module Yabeda
       counter :request_total,
               comment: 'A counter of the total number of external HTTP \
                          requests.',
-              tags: %i[host port method]
+              tags: %i[host port method query]
       counter :response_total,
               comment: 'A counter of the total number of external HTTP \
                          responses.',
