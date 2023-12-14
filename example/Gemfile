@@ -8,8 +8,8 @@ gem 'yabeda-prometheus'
 
 gem 'puma'
 gem 'rack', '~> 2.2'
-gem 'webrick'
 gem 'sidekiq'
+gem 'webrick'
 
 gem 'faraday', require: false
 gem 'sniffer', '>= 0.4.0'

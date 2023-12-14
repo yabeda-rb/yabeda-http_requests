@@ -6,24 +6,18 @@ RSpec.describe Yabeda::HttpRequests do
   end
 
   describe 'metrics' do
-    before do
-      Yabeda.configure!
-      Faraday.get 'http://sushi.com/nigiri/sake.json'
-    end
-
+    # rubocop: disable Layout/MultilineMethodCallIndentation
     it 'holds the proper data' do
-      expect(Yabeda.http_request_total.values).to(
-        eq({ host: 'sushi.com', method: 'GET', port: 80 } => 1)
-      )
-      expect(Yabeda.http_response_total.values.keys.first).to(
-        include({
-                  host: 'sushi.com', method: 'GET', port: 80,
-                  status: 301
-                })
-      )
-      expect(Yabeda.http_response_duration.values.keys.first).to(
-        eq(host: 'sushi.com', port: 80, method: 'GET', status: 301)
-      )
+      expect { Faraday.get 'https://example.net/' }.to \
+        increment_yabeda_counter(Yabeda.http_request_total).by(1)
+          .with_tags(method: 'GET', host: 'example.net', port: 443)
+      .and \
+        increment_yabeda_counter(Yabeda.http_response_total).by(1)
+          .with_tags(method: 'GET', host: 'example.net', port: 443, status: 200)
+      .and \
+        measure_yabeda_histogram(Yabeda.http_response_duration)
+          .with_tags(method: 'GET', host: 'example.net', port: 443, status: 200)
     end
+    # rubocop: enable Layout/MultilineMethodCallIndentation
   end
 end
