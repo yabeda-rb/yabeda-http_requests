@@ -2,6 +2,7 @@
 
 require 'yabeda/http_requests/version'
 require 'yabeda/http_requests/sniffer'
+require 'yabeda/http_requests/config'
 require 'yabeda'
 require 'sniffer'
 
@@ -16,22 +17,23 @@ module Yabeda
     ].freeze
 
     Yabeda.configure do
+      config = ::Yabeda::HttpRequests::Config.new
+      buckets = config.buckets || LONG_RUNNING_REQUEST_BUCKETS
+
       group :http
 
       counter :request_total,
-              comment: 'A counter of the total number of external HTTP \
-                         requests.',
+              comment: 'A counter of the total number of external HTTP requests.',
               tags: %i[host port method]
       counter :response_total,
-              comment: 'A counter of the total number of external HTTP \
-                         responses.',
+              comment: 'A counter of the total number of external HTTP responses.',
               tags: %i[host port method status]
 
       histogram :response_duration, tags: %i[host port method status],
                                     unit: :milliseconds,
-                                    buckets: LONG_RUNNING_REQUEST_BUCKETS,
-                                    comment: "A histogram of the response \
-                                               duration (milliseconds)."
+                                    buckets: buckets,
+                                    comment: "A histogram of the response duration (milliseconds)."
+
 
       ::Sniffer.config do |c|
         c.enabled = true
