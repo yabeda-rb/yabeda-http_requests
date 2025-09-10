@@ -9,14 +9,14 @@ RSpec.describe Yabeda::HttpRequests do
     # rubocop: disable Layout/MultilineMethodCallIndentation
     it 'holds the proper data' do
       expect { Faraday.get 'https://example.net/' }.to \
-        increment_yabeda_counter(Yabeda.http_request_total).by(1)
-          .with_tags(method: 'GET', host: 'example.net', port: 443)
+        increment_yabeda_counter(Yabeda.http_request_total)
+          .with({ method: 'GET', host: 'example.net', port: 443 } => 1)
       .and \
-        increment_yabeda_counter(Yabeda.http_response_total).by(1)
-          .with_tags(method: 'GET', host: 'example.net', port: 443, status: 200)
+        increment_yabeda_counter(Yabeda.http_response_total)
+          .with({ method: 'GET', host: 'example.net', port: 443, status: 200 } => 1)
       .and \
         measure_yabeda_histogram(Yabeda.http_response_duration)
-          .with_tags(method: 'GET', host: 'example.net', port: 443, status: 200)
+          .with({ method: 'GET', host: 'example.net', port: 443, status: 200 } => be > 0)
     end
     # rubocop: enable Layout/MultilineMethodCallIndentation
   end
