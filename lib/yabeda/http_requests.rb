@@ -32,8 +32,7 @@ module Yabeda
       histogram :response_duration, tags: %i[host port method status],
                                     unit: :milliseconds,
                                     buckets: buckets,
-                                    comment: "A histogram of the response duration (milliseconds)."
-
+                                    comment: 'A histogram of the response duration (milliseconds).'
 
       ::Sniffer.config do |c|
         c.enabled = true
