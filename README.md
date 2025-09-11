@@ -67,6 +67,14 @@ Follow the [yabeda-external-http-requests](http://localhost:3000/d/OGd-oEXWz/yab
 Finally, after a couple of minutes when data collected you will see the following:
 ![Monitor external HTTP calls with Grafana](docs/dashboard.png)
 
+## Configuration
+
+Configuration is handled by [anyway_config] gem. With it you can load settings from environment variables (upcased and prefixed with `YABEDA_HTTP_REQUESTS_`), YAML files, and other sources. See [anyway_config] docs for details.
+
+| Config key | Type  | Default | Description                                 |
+| -----------| ----- | ------- | ------------------------------------------- |
+| `buckets`  | array | []      | Set buckets to be used by histogram metrics |
+
 ## Development with Docker
 
 Get local development environment working and tests running is very easy with docker-compose:
