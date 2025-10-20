@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 0.3.0 - 2025-10-20
+
+### Added
+
+- Ability to configure histogram bucket sizes for the `response_duration` metric. [#10](https://github.com/yabeda-rb/yabeda-http_requests/pull/10) by [@ryan-dyer-sp][]
+
 ## 0.2.1 - 2023-12-14
 
 ### Fixed
@@ -43,3 +49,4 @@ Initial release.
 [@danmarcab]: https://github.com/danmarcab "Daniel Marín"
 [@Envek]: https://github.com/Envek "Andrey Novikov"
 [@webmat]: https://github.com/webmat "Mathieu Martin"
+[@ryan-dyer-sp]: https://github.com/ryan-dyer-sp "Ryan"
